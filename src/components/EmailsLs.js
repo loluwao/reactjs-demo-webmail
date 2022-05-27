@@ -26,10 +26,13 @@ class EmailsLs extends React.Component {
       {sender: "professor", subject: "missing assignment", date: "May 4", read: false, starred: false}
     ];
       
-      const renderItems = allEmails.map((info) => <EmailPreview sender={info.sender} subject={info.subject} content={info.content} date={info.date } read={info.read}/>);
+      const renderItems = allEmails.map((info) => <EmailPreview sender={info.sender} subject={info.subject} content={info.content} date={info.date } read={info.read} starred={info.starred}/>);
       return (
        <div id="table-container">
           <table id="emails">
+            <colgroup>
+              <col className="star-status"/>  
+            </colgroup>
           <tbody>
             {renderItems}
           </tbody>

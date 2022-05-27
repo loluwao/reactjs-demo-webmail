@@ -29,22 +29,27 @@ class Dashboard extends React.Component {
 
     const pushSentEmail = () => {
 
+
+    }
+
+    const updateMailbox = (type) => {
+      this.setState({mailboxType: type});
     }
 
     return (
       <div id="d">
         <div id="dashboard">
           <span className='inline left'>
-            <div><EmailHeading /></div>
-          
+            <div><EmailHeading /> </div>
+            {this.state.mailboxType}
             <div onClick={openPopUp}>
               <ComposeButton />
               
             </div>
             
             <div>
-                <div><Mailbox label="Inbox" selected={true}/></div>
-                <div><Mailbox label="Starred" selected={false}/></div>
+                <div onClick={() => updateMailbox("inbox")}><Mailbox label="Inbox" selected={(this.state.mailboxType === "inbox") ? true : false}/></div>
+                <div onClick={() => updateMailbox("starred")}><Mailbox label="Starred" selected={(this.state.mailboxType === "starred") ? true : false}/></div>
                 <div><Mailbox label="Important" selected={false}/></div>
                 <div><Mailbox label="Sent" selected={false}/></div>
                 <div><Mailbox label="Drafts" selected={false}/></div>
