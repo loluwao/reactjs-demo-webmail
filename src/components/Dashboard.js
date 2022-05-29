@@ -28,8 +28,10 @@ class Dashboard extends React.Component {
     }
 
     const pushSentEmail = () => {
-
-
+      let recipient = document.getElementById("recipient").value;
+      let subject = document.getElementById("subject").value;
+      alert(subject);
+      this.setState({makingEmail: false});
     }
 
     const updateMailbox = (type) => {
@@ -41,7 +43,6 @@ class Dashboard extends React.Component {
         <div id="dashboard">
           <span className='inline left'>
             <div><EmailHeading /> </div>
-            {this.state.mailboxType}
             <div onClick={openPopUp}>
               <ComposeButton />
               
@@ -51,7 +52,7 @@ class Dashboard extends React.Component {
                 <div onClick={() => updateMailbox("inbox")}><Mailbox label="Inbox" selected={(this.state.mailboxType === "inbox") ? true : false}/></div>
                 <div onClick={() => updateMailbox("starred")}><Mailbox label="Starred" selected={(this.state.mailboxType === "starred") ? true : false}/></div>
                 <div><Mailbox label="Important" selected={false}/></div>
-                <div><Mailbox label="Sent" selected={false}/></div>
+                <div onClick={() => updateMailbox("sent")}><Mailbox label="Sent" selected={(this.state.mailboxType === "sent") ? true : false}/></div>
                 <div><Mailbox label="Drafts" selected={false}/></div>
                 {/*
                 <Mailbox label="Drafts"/>
@@ -64,14 +65,15 @@ class Dashboard extends React.Component {
           {this.state.makingEmail && 
           <div id="pop-up">
             <div id="pop-up-header">
-                <ComposePopUpHeader/>
-                <span className="" onClick={closePopUp}>
-                  <DiscardButton />
-                </span>
-              </div>
+              <ComposePopUpHeader/>
+              <span className="" onClick={closePopUp}>
+                <DiscardButton />
+              </span>
+            </div>
+            <form >
             <ComposePopUp/>
-            <span onClick={closePopUp}><SendButton/></span>
-              
+            <span onClick={pushSentEmail}><SendButton/></span>
+            </form>
           </div>}
 
           
@@ -79,7 +81,7 @@ class Dashboard extends React.Component {
         </div>
         <div className="right inline">
         <SearchBox/>
-        <EmailsLs/>
+        <EmailsLs mailbox={this.state.mailboxType}/>
         </div>
       </div>
     )

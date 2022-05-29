@@ -24,13 +24,14 @@ input {
   
   height: 700px;
   overflow-y: scroll;
+  display: block;
 }
 
 table {
   width: 100%;
   background-color: rgba(239, 247, 252);
   border-collapse: collapse;
-
+  table-layout: fixed;
 }
 
 .email {
@@ -43,8 +44,6 @@ table {
   box-shadow: 0px 2px 0.5px rgb(176, 176, 176);
 }
 
-
-
 .read {
   font-weight: normal;
   background-color: rgb(212,232,240);
@@ -54,12 +53,24 @@ table {
   font-weight: bold;
 }
 
+.star-status {
+  vertical-align: middle;
+  width: 5%;
+  order: 0;
+}
+
 .sender {
   width: 40%;
+  order: 1;
+}
+
+
+
+.star-icon {
 }
 
 .subject {
-
+  width: 30%;
 }
 
 .content {
@@ -257,6 +268,7 @@ textarea.msg {
   position:static;
   border: none;
   background-color: transparent;
+  size: 20px;
 }
 
 #discard-button:hover {
@@ -264,9 +276,6 @@ textarea.msg {
   background-color: rgba(181, 181, 181, 0.421);
 }
 
-#star-icon {
-  padding-right: 4px;
-}
 
 #send-button {
   border: none;

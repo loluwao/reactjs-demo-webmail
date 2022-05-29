@@ -22,13 +22,32 @@ class EmailsLs extends React.Component {
     */}
 
     allEmails = [
-      {sender: "brother", subject: "hi", date: "May 5", read: true, starred: true},
-      {sender: "professor", subject: "missing assignment", date: "May 4", read: false, starred: false}
+      {sender: "Brother", subject: "hi", date: "May 5", read: true, starred: true},
+      {sender: "Professor Jjjjjjjjjjjjjjjj", subject: "missing assignment", date: "May 4", read: false, starred: false},
+      {sender: "To: RA", subject: "moving out", date: "May 8", read: true, starred: false}
     ];
       
-      const renderItems = allEmails.map((info) => <EmailPreview sender={info.sender} subject={info.subject} content={info.content} date={info.date } read={info.read} starred={info.starred}/>);
+      let renderItems;
+      let specificEmails = [];
+      if (mailbox === "inbox") {
+        specificEmails = allEmails.filter(function(email) {
+          return !email.sender.startsWith("To:");
+        });
+      } else if (mailbox === "starred") {
+        specificEmails = allEmails.filter(function(email) {
+          return email.starred;
+        });
+      } else if (mailbox === "sent") {
+        specificEmails = allEmails.filter(function(email) {
+          return email.sender.startsWith("To:");
+        });
+      }
+
+      renderItems = specificEmails.map((info) => <EmailPreview sender={info.sender} subject={info.subject} content={info.content} date={info.date } read={info.read} starred={info.starred}/>);
+
       return (
        <div id="table-container">
+         <p>{mailbox}</p>
           <table id="emails">
             <colgroup>
               <col className="star-status"/>  
