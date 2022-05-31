@@ -7,7 +7,7 @@ class Mailboxes extends React.Component {
             <div>
                 <Mailbox label="Inbox"/>
                 <Mailbox label="Starred"/>
-                <Mailbox label="Important"/>
+                <Mailbox label="Unread"/>
                 <Mailbox label="Sent"/>
                 <Mailbox label="Drafts"/>
                 {/*
