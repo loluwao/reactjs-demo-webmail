@@ -5,7 +5,7 @@ import isstarred from "./orangestar.png";
 class EmailPreview extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {read: this.props.read, starred: this.props.starred};
+        this.state = {id: this.props.id, read: this.props.read, starred: this.props.starred};
     
     }
     render() {
@@ -14,6 +14,7 @@ class EmailPreview extends React.Component {
         const subject = this.props.subject;
         const date = this.props.date;
         const content = this.props.content;
+        const childToParent = this.props.childToParent;
         const markAsRead = () => {
             this.setState({read: true});
               
@@ -30,7 +31,9 @@ class EmailPreview extends React.Component {
         
             return (
                 
-                <tr className={`email ${this.state.read ? "read" : "unread"}`} onClick={markAsRead}> 
+                <tr className={`email ${this.state.read ? "read" : "unread"}`} onClick={() => {
+                                                                                                markAsRead();
+                                                                                                childToParent(this.state.id, this.state.starred, this.stateread);}}> 
                 <td className="star-status"><img src={this.state.starred ? isstarred : unstarred} className="star-icon" onClick={updateStarred}/></td>
                 <td className="sender">{sender}</td>
                 <td className="subject">{subject}</td>
