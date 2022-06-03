@@ -14,10 +14,12 @@ class EmailPreview extends React.Component {
         const subject = this.props.subject;
         const date = this.props.date;
         const content = this.props.content;
-        const childToParent = this.props.childToParent;
+        const updateArray = this.props.updateArray;
         const markAsRead = () => {
             this.setState({read: true});
-              
+            
+            updateArray(this.state.id, this.state.read);
+            
         }
 
         const updateStarred = () => {
@@ -31,9 +33,7 @@ class EmailPreview extends React.Component {
         
             return (
                 
-                <tr className={`email ${this.state.read ? "read" : "unread"}`} onClick={() => {
-                                                                                                markAsRead();
-                                                                                                childToParent(this.state.id, this.state.starred, this.stateread);}}> 
+                <tr className={`email ${this.state.read ? "read" : "unread"}`} onClick={markAsRead} > 
                 <td className="star-status"><img src={this.state.starred ? isstarred : unstarred} className="star-icon" onClick={updateStarred}/></td>
                 <td className="sender">{sender}</td>
                 <td className="subject">{subject}</td>
