@@ -22,17 +22,13 @@ class EmailsLs extends React.Component {
     */}
 
     let allEmails = [
-      { id: 0, sender: "Brother", subject: "hi", date: "May 5", read: true, starred: true },
-      { id: 1, sender: "Professor J", subject: "missing assignment", date: "May 4", read: false, starred: false },
-      { id: 2, sender: "To: RA", subject: "moving out", date: "May 8", read: true, starred: false }
+      { id: 0, sender: "Brother", subject: "hi", date: "May 5", read: true, starred: false },
+      { id: 1, sender: "Professor J", subject: "missing assignment", date: "May 4", read: false, starred: true },
+      { id: 3, sender: "To: RA", subject: "moving out", date: "May 8", read: true, starred: false }
     ];
-    const childToParent = (idToEdit, starred, read) => {
-      for (const info of allEmails) {
-        if (info.id === idToEdit) {
-          info.starred = starred;
-          info.read = read;
-        }
-      }
+    const updateArray = (idToEdit, read) => {
+      allEmails[idToEdit].read = read;
+      
     }
 
     let renderItems;
@@ -51,12 +47,17 @@ class EmailsLs extends React.Component {
       });
     } else if (mailbox === "unread") {
       specificEmails = allEmails.filter(function (email) {
+        
         return !email.read;
+      });
+    } else if (mailbox === "read") {
+      specificEmails = allEmails.filter(function (email) {
+        
+        return email.read;
       });
     }
 
-    renderItems = specificEmails.map((info) => <EmailPreview sender={info.sender} subject={info.subject} content={info.content} date={info.date} read={info.read} starred={info.starred} id={info.id} childToParent={childToParent}/>);
-
+    renderItems = specificEmails.map((info) => <EmailPreview sender={info.sender} subject={info.subject}  date={info.date} read={info.read} starred={info.starred} id={info.id } updateArray={updateArray}/>);
     return (
       <div id="table-container">
         <table id="emails">
